@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
 
   resources :comments, only: [:destroy, :show, :update]
-  
+
+    patch '/contacts/:id/favorite' => 'contacts#favorite'
+
   # get '/users' => 'users#index'
   # post '/users' => 'users#create'
   # get '/users/new' => 'users#new', :as => 'new_user'

@@ -10,7 +10,12 @@ class ContactsController < ApplicationController
       )
     end
   end
-
+  def favorite
+    @contact = Contact.find(params[:id])
+    @contact.favorited = !@contact.favorited
+    @contact.save!
+    render json: @contact
+  end
   def destroy
     @contact = Contact.find(params[:id])
     @contact.destroy
