@@ -12,4 +12,10 @@ class ContactShare < ActiveRecord::Base
     foreign_key: :contact_id,
     primary_key: :id
   )
+  has_many(
+    :contacts,
+    class_name: "Contact",
+    foreign_key: :contact_id,
+    primary_key: :id
+  )
 end

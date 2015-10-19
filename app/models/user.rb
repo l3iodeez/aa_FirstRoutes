@@ -22,4 +22,15 @@ class User < ActiveRecord::Base
     :comments,
     as: :commentable
   )
+  has_many(
+    :groups,
+    class_name: "Group",
+    foreign_key: :user_id,
+    primary_key: :id
+  )
+  has_many(
+    :groupings,
+    through: :groups,
+    source: :group
+  )
 end

@@ -10,11 +10,7 @@ class CommentsController < ApplicationController
       )
     end
   end
-  def favorite
-    @comment = Comment.find(params[:id])
-    @comment.favorited = !@comment.favorited
-    @comment.save!
-  end
+
 
   def destroy
     @comment = Comment.find(params[:id])
