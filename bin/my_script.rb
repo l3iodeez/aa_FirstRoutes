@@ -80,9 +80,19 @@ def create_comment
 
   puts RestClient.post(url, comment: { text: "This is a comment", commentable_id: 3, commentable_type: "User"})
 end
+def create_grouping
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: '/groups/1/groupings'
+  ).to_s
+
+  puts RestClient.post(url, grouping: { contact_id: 8, group_id: 1 } )
+end
 
 begin
-  create_comment
+  create_grouping
 rescue RestClient::Exception => e
   puts e.message
 end

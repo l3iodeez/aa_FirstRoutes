@@ -1,11 +1,21 @@
 Rails.application.routes.draw do
+  resources :groups
+  resources :groupings
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   resources :users, only: [:create, :destroy, :index, :show, :update] do
     resources :contacts, only: [:create, :index]
     resources :comments, only: [:create, :index]
+    resources :groups, only: [:create, :index]
+
   end
+
+  resources :groups, only: [:destroy, :show, :update] do
+    resources :groupings, only: [:create, :index]
+  end
+
+  resources :groupings, only: [:destroy, :show, :update]
 
   resources :contacts, only: [:destroy, :show, :update] do
     resources :comments, only: [:create, :index]
