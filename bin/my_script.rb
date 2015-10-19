@@ -59,8 +59,30 @@ def destroy_user
   puts RestClient.delete(url)
 end
 
+def create_contact
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: '/users/3/contacts'
+  ).to_s
+
+  puts RestClient.post(url, contact: { name:"user2@email.com", email:"user2john"})
+end
+
+def create_comment
+  url = Addressable::URI.new(
+    scheme: 'http',
+    host: 'localhost',
+    port: 3000,
+    path: '/users/3/comments'
+  ).to_s
+
+  puts RestClient.post(url, comment: { text: "This is a comment", commentable_id: 3, commentable_type: "User"})
+end
+
 begin
-  destroy_user
+  create_comment
 rescue RestClient::Exception => e
   puts e.message
 end

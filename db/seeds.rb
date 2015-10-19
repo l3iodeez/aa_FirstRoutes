@@ -7,5 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 5.times do |i|
-  User.create!(email: "user#{i+1}@email.com", name: "user#{i+1}")
+  user = User.create!(username: "user#{i+1}@email.com")
+  3.times do |j|
+    contact = user.contacts.create!(name: "User#{i+1}'s contact#{j+1}", email: "contact#{j+1}@email.com")
+    contact.contact_shares.create!(user_id: (((1..i).to_a - [i]).sample)|| 2, contact_id: j+1 )
+  end
 end

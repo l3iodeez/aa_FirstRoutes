@@ -2,16 +2,25 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  #resources :users
+  resources :users, only: [:create, :destroy, :index, :show, :update] do
+    resources :contacts, only: [:create, :index]
+    resources :comments, only: [:create, :index]
+  end
 
-  get '/users' => 'users#index'
-  post '/users' => 'users#create'
-  get '/users/new' => 'users#new', :as => 'new_user'
-  get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
-  get '/users/:id' => 'users#show', :as => 'user'
-  patch '/users/:id' => 'users#update'
-  put '/users/:id' => 'users#update'
-  delete '/users/:id' => 'users#destroy'
+  resources :contacts, only: [:destroy, :show, :update] do
+    resources :comments, only: [:create, :index]
+  end
+
+  resources :comments, only: [:destroy, :show, :update]
+  
+  # get '/users' => 'users#index'
+  # post '/users' => 'users#create'
+  # get '/users/new' => 'users#new', :as => 'new_user'
+  # get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
+  # get '/users/:id' => 'users#show', :as => 'user'
+  # patch '/users/:id' => 'users#update'
+  # put '/users/:id' => 'users#update'
+  # delete '/users/:id' => 'users#destroy'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
